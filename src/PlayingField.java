@@ -15,36 +15,48 @@ public class PlayingField {
         castleX = random.nextInt(sz);
         pos[castleY][castleX] = 3;
     }
+    public static void setHeroPos(){
+        Random random = new Random();
+        Hero.xPos = random.nextInt(sz);
+        pos[Hero.yPos][Hero.xPos] = 4;
+    }
     public static void setMonstersPos(){
-        pos[0][1] = 2;
-        pos[0][2] = 2;
-        pos[0][3] = 1;
-        pos[1][4] = 1;
-        pos[1][1] = 2;
-        pos[1][0] = 2;
-        pos[1][3] = 1;
-        pos[1][4] = 2;
-        pos[2][1] = 2;
-        pos[2][2] = 1;
-        pos[2][3] = 1;
-        pos[2][4] = 1;
+        int curMonserNum = 0;
+        Random random = new Random();
+        while (curMonserNum < 12) {
+            int x = random.nextInt(sz);
+            int y = random.nextInt(sz);
+            if (pos[x][y] == 0) {
+                curMonserNum++;
+                if (curMonserNum > 6) {
+                    pos[x][y] = 2;
+                } else {
+                    pos[x][y] = 1;
+                }
+            }
+        }
     }
     public static void display(int lives){
         for (int i = 0; i < sz; i++) {
             System.out.println(border);
             for (int j = 0; j < sz; j++) {
                 System.out.print("|");
-                if (i == 0 && j == castleX) {
-                    System.out.print(castle);
-                }
-                else if (i == 4 && j == 2) {
-                    System.out.print(hero);
-                } else if (pos[i][j] == 1) {
-                    System.out.print(littleMonster);
-                } else if (pos[i][j] == 2) {
-                    System.out.print(bigMonster);
-                } else {
-                    System.out.print("  ");
+                switch (pos[i][j]){
+                    case 1:
+                        System.out.print(littleMonster);
+                        break;
+                    case 2:
+                        System.out.print(bigMonster);
+                        break;
+                    case 3:
+                        System.out.print(castle);
+                        break;
+                    case 4:
+                        System.out.print(hero);
+                        break;
+                    default:
+                        System.out.print("  ");
+                        break;
                 }
             }
             System.out.println("|");

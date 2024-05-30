@@ -2,9 +2,13 @@ import java.util.Scanner;
 
 public class Game {
     public static int difficultGame;
-    public static void play(){
+    private static void setPos(){
         PlayingField.setCastlePos();
+        PlayingField.setHeroPos();
         PlayingField.setMonstersPos();
+    }
+    public static void play(){
+        setPos();
         PlayingField.display(Hero.lives);
         System.out.println("Выбери сложность игры(от 1 до 5):");
         Scanner scanner = new Scanner(System.in);
