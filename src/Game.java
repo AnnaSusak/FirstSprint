@@ -49,6 +49,15 @@ public class Game {
                     Hero.lives--;
                 }
                 PlayingField.pos[(Hero.yPos) ][Hero.xPos] = 4;
+            } else {
+                if (BigMonster.provide_task(difficultGame)) {
+                    System.out.println("Верно! Ты победил монстра");
+                    Hero.lives++;
+                } else {
+                    System.out.println("Ты проиграл эту битву!");
+                    Hero.lives-=2;
+                }
+                PlayingField.pos[(Hero.yPos) ][Hero.xPos] = 4;
             }
         }
     }
