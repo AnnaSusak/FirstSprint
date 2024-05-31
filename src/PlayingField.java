@@ -3,7 +3,7 @@ import java.util.Random;
 public class PlayingField {
     static int sz = 5;
     static String border = "+ -".repeat(sz);
-    static int[][] pos = new int[sz][sz];
+    public static int[][] pos = new int[sz][sz];
     public static int castleX;
     public static int castleY = 0;
     static String castle = "\uD83C\uDFF0";

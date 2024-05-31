@@ -7,6 +7,42 @@ public class Game {
         PlayingField.setHeroPos();
         PlayingField.setMonstersPos();
     }
+    public static void makeMove() {
+        int newX = -1;
+        int newY= -1;
+        Scanner scanner = new Scanner(System.in);
+        while (newX == -1 && newY==-1) {
+            System.out.print("Введите координату x хода: ");
+            newX = scanner.nextInt();
+            newX -= 1;
+            if (newX < 0 || newX > PlayingField.sz -1||
+                    (newX != Hero.xPos + 1 && newX != Hero.xPos - 1 && newX != Hero.xPos)) {
+                System.out.println("Некорректный ввод.");
+                newX = -1;
+            } else {
+                System.out.print("Введите координату y хода: ");
+                newY = scanner.nextInt();
+                newY -= 1;
+                if (newY < 0 || newY > PlayingField.sz -1||
+                        (newY != Hero.yPos && newX != Hero.xPos) ||
+                        (newY!= Hero.yPos + 1 && newY != Hero.yPos - 1 && newY != Hero.yPos)) {
+                    System.out.println("Некорректный ввод.");
+                    newY = -1;
+                } else {
+                    PlayingField.pos[(Hero.yPos) ][Hero.xPos] = 0;
+                    Hero.xPos = newX;
+                    Hero.yPos = newY;
+                }
+            }
+        }
+        if (PlayingField.pos[(Hero.yPos) ][Hero.xPos]==0) {
+            PlayingField.pos[(Hero.yPos) ][Hero.xPos] = 4;
+        } else if (PlayingField.pos[(Hero.yPos) ][Hero.xPos] == (3)) {
+            System.out.println("Вы прошли игру");
+        } else {
+            System.out.println("Решите задачу.");
+        }
+    }
     public static void play(){
         setPos();
         PlayingField.display(Hero.lives);
@@ -19,11 +55,10 @@ public class Game {
         }
         System.out.println("Выбранная сложность:\t" + difficultGame);
         while ((Hero.lives > 0) && !(PlayingField.castleX == Hero.xPos && PlayingField.castleY == Hero.xPos)) {
-            // логика хода
+            PlayingField.display(Hero.lives);
+            makeMove();
         }
-        if (PlayingField.castleX == Hero.xPos && PlayingField.castleY == Hero.xPos) {
-            System.out.println("Поздравляем! Вы выиграли!");
-        } else {
+        if (Hero.lives < 1){
             System.out.println("Вы проиграли(");
         }
     }
