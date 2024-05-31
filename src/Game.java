@@ -40,7 +40,16 @@ public class Game {
         } else if (PlayingField.pos[(Hero.yPos) ][Hero.xPos] == (3)) {
             System.out.println("Вы прошли игру");
         } else {
-            System.out.println("Решите задачу.");
+            if (PlayingField.pos[(Hero.yPos) ][Hero.xPos] == (1)) {
+                if (LittleMonster.provide_task()) {
+                    System.out.println("Верно! Ты победил монстра");
+                    Hero.lives++;
+                } else {
+                    System.out.println("Ты проиграл эту битву!");
+                    Hero.lives--;
+                }
+                PlayingField.pos[(Hero.yPos) ][Hero.xPos] = 4;
+            }
         }
     }
     public static void play(){
